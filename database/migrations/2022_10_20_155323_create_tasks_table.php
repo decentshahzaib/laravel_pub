@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
+<<<<<<< Updated upstream
             $table->string('name', 50);
+=======
+            $table->string('name');
+>>>>>>> Stashed changes
             $table->timestamps();
         });
     }

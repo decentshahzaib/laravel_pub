@@ -35,11 +35,19 @@
  
                                 <!-- Delete Button -->
                                 <td>
+<<<<<<< Updated upstream
                                     <form action="{{ route('delete', [$task->id]) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                             
                                         <button type="submit" class="btn btn-danger">Delete Task</button>
+=======
+                                    <form action="/task/{{ $task->id }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                            
+                                        <button type="button" class="btn btn-danger">Delete Task</button>
+>>>>>>> Stashed changes
                                     </form>
                                 </td>
                             </tr>
