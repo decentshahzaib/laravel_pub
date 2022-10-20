@@ -26,7 +26,7 @@ Route::get('/', function () {
 
 Route::post('/task', function (Request $req) {
     $validator = Validator::make($req->all(), [
-        'name' => 'required|max:255',
+        'name' => 'required | min:5 | max:20',
     ]);
  
     if ($validator->fails()) {
@@ -42,7 +42,7 @@ Route::post('/task', function (Request $req) {
     return redirect('/');
  
     // Create The Task...
-});
+})->name('store');
 
 Route::get('/view', function () {
 
@@ -56,4 +56,4 @@ Route::delete('/task/{id}', function ($id) {
     Task::findOrFail($id)->delete();
  
     return redirect('/view');
-});
+})->name('delete');

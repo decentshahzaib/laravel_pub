@@ -35,7 +35,7 @@
  
                                 <!-- Delete Button -->
                                 <td>
-                                    <form action="/task/{{ $task->id }}" method="POST">
+                                    <form action="{{ route('delete', [$task->id]) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                             

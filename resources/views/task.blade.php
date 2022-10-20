@@ -11,13 +11,13 @@
         @include('common.errors')
  
         <!-- New Task Form -->
-        <form action="/task" method="POST" class="form-horizontal">
+        <form action="{{ route('store') }}" method="POST" class="form-horizontal">
             <!-- {{ csrf_field() }} -->
             @csrf
  
             <!-- Task Name -->
-            <div class="form-group">
-                <label for="task" class="control-label">Task</label> <span><a href="/view" class="btn btn-info">View Tasks</a></span>
+            <div class="form-group mb-1">
+                <label for="task" class="control-label mb-3">Task</label> <span><a href="/view" class="btn btn-info">View Tasks</a></span>
  
                 <div class="col-sm-6">
                     <input type="text" name="name" id="task-name" class="form-control">
