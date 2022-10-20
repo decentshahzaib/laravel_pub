@@ -10,3 +10,26 @@ function myfun(val) {
         $('#drt option[value="AM"]').attr('selected', true);
     }
 }
+
+$(document).ready(function () { 
+    $('#sub1').on('click', function (e) { 
+        e.preventDefault();
+        var fdata = new FormData(form1);
+        // alert(fdata);
+
+        $.ajax({
+            url: '/task3/insert',
+            type: 'post',
+            contentType: false,
+            processData: false,
+            data: fdata,
+            success: function (res) {
+                if (res == 1) {
+                    alert("Data has been inserted");
+                    window.location.reload();
+                }
+                alert(res);
+            }
+        });
+    });
+});

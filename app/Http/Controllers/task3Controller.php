@@ -22,9 +22,7 @@ class task3Controller extends Controller
 
         $valid = Validator::make($req->all(), $arr);
         if ($valid -> fails()) {
-            return redirect('/task3')
-                ->withInput()
-                ->withErrors($valid);
+            return 'Please Fill All Fields!';
         }
         else{
 
@@ -37,7 +35,7 @@ class task3Controller extends Controller
             ])->get();
 
             if ($data->count() > 0) {
-                return redirect('/task3')->with('msg', 'Time Already Exists!');
+                return 'Time Already Exists!';
             }
             else{
                 
@@ -57,7 +55,7 @@ class task3Controller extends Controller
             $data->time = $time;
             $data->date = $req->date;
             if($data->save()){
-                return redirect('/task3');
+                return 1;
             }
         }
     }

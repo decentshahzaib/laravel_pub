@@ -9,13 +9,9 @@
             <div class="panel-body border mb-3 p-3">
                 <!-- Display Validation Errors -->
                 @include('common.errors')
-
-                @if(session('msg') != '')
-                    <div class="alert alert-warning">{{ session('msg') }}</div>
-                @endif
         
                 <!-- New Task Form -->
-                <form action="{{ route('task3Store') }}" method="POST" class="form-horizontal">
+                <form action="{{ route('task3Store') }}" method="POST" class="form-horizontal" id="form1">
                     <!-- {{ csrf_field() }} -->
                     @csrf
         
@@ -41,7 +37,7 @@
                     <!-- Add Task Button -->
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-6">
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" class="btn btn-success" id="sub1">
                                 <i class="fa fa-plus"></i> Add Task
                             </button>
                         </div>
