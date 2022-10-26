@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Request;
-use App\Models\Task;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,44 +14,10 @@ use App\Models\Task;
 |
 */
 
-Route::get('/', function () {
-    $tasks = Task::orderBy('created_at', 'asc')->get();
- 
-    return view('task', [
-        'tasks' => $tasks
-    ]);
-});
+Route::get('/', [TaskController::class, 'create']);
 
-Route::post('/task', function (Request $req) {
-    $validator = Validator::make($req->all(), [
-        'name' => 'required | min:5 | max:20',
-    ]);
- 
-    if ($validator->fails()) {
-        return redirect('/')
-            ->withInput()
-            ->withErrors($validator);
-    }
+Route::post('/task', [TaskController::class, 'store'])->name('store');
 
-    $task = new Task;
-    $task->name = $req->name;
-    $task->save();
- 
-    return redirect('/');
- 
-    // Create The Task...
-})->name('store');
+Route::get('/view', [TaskController::class, 'index']);
 
-Route::get('/view', function () {
-
-    $tasks = Task::all(); 
-    return view('tasks', compact('tasks'));
- 
-    // Create The Task...
-});
-
-Route::delete('/task/{id}', function ($id) {
-    Task::findOrFail($id)->delete();
- 
-    return redirect('/view');
-})->name('delete');
+Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('delete');
