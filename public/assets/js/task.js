@@ -1,9 +1,9 @@
-function myfun(val) {
+function myFun(val) {
     var value = val.value;
-    var h = value.split(':');
-    // alert(h[0]);
+    var houre = value.split(':');
+    // alert(houre[0]);
 
-    if (h > '12') {
+    if (houre > '12') {
         $('#drt option[value="PM"]').attr('selected', true);
     }
     else {
@@ -25,15 +25,54 @@ $(document).ready(function () {
             processData: false,
             data: fdata,
             success: function (res) {
-                if (res == 1) {
-                    alert("Data has been inserted");
-                    window.location.reload();
+                if (res.status == 'success') {
+                    showMsg(res.status, res.msg);
+                    
                 }
                 else {
-                    alert(res);
+
+                    // alert(typeof (res['msg']));
+
+                    if (typeof (res['msg']) != 'string') {
+                        
+                        var list = "<ul>";
+                        $.each(res['msg'], function (key, val) {
+                            list += "<li>" + val + "</li>";
+                        });
+                        list += "</ul>";
+                        showMsg(res.status, list);
+                    }
+                    else {
+                        showMsg(res.status, res.msg);
+                    }
                 }
 
             }
         });
     });
 });
+
+function showMsg(val1, val2) {
+    if (val1 == 'error') {
+        var msg = $('#error');
+    }
+    else {
+        var msg = $('#success');
+    }
+
+    msg.html(val2);
+    msg.css({
+        'display': 'block',
+    });
+
+    setTimeout(() => {
+        msg.css({
+            'display': 'none',
+        });
+        
+        if (val1 == 'success') {
+            window.location.reload();
+        }
+    }, 3000);
+
+}

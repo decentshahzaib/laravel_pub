@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Task;
 
-class taskController extends Controller
+class TaskController extends Controller
 {
     public function index(){
         $tasks = Task::all();
@@ -15,14 +15,22 @@ class taskController extends Controller
     
     public function store(Request $req){
         $arr = [
-            'name' => 'required',
+            'name' => 'required | min:5 | max:20',
             'time' => 'required',
             'date' => 'required'
         ];
 
         $valid = Validator::make($req->all(), $arr);
-        if ($valid -> fails()) {
-            return 'Please Fill All Fields!';
+        if ($valid->fails()) {
+            // return ['status' => 'error', 'msg' => 'Please Fill All Fields!'];
+            // $list = "<ul>";
+            // foreach ($valid->messages() as $err) {
+            //     $list .= "<li>". $err ."</li>";
+            // }
+            //  $list .= "</ul>";
+            
+            $list = $valid->messages();
+            return ['status' => 'error', 'msg' => $list];
         }
         else{
 
@@ -35,14 +43,14 @@ class taskController extends Controller
             ])->get();
 
             if ($data->count() > 0) {
-                return 'Time Already Exists!';
+                return ['status' => 'error', 'msg' => 'Time Already Exists!'];
             }
             else{
                 
-                $h = date('H', strtotime($req->time));
-                if ($h > 12) {
-                    $h = $h - 12;
-                    $time = date($h .':i A', strtotime($req->time));
+                $houre = date('H', strtotime($req->time));
+                if ($houre > 12) {
+                    $houre = $houre - 12;
+                    $time = date($houre .':i A', strtotime($req->time));
                 }
                 else{
                     $time = date('H:i A', strtotime($req->time));
@@ -55,14 +63,13 @@ class taskController extends Controller
             $data->time = $time;
             $data->date = $req->date;
             if($data->save()){
-                return 1;
+                return ['status' => 'success', 'msg' => 'Data has been Inserted.'];
             }
         }
     }
 
     public function destroy($id){
-        $tasks = Task::find($id);
-        $tasks->delete();
+        $tasks = Task::findORFail($id)->delete();
         return redirect('/task');
     }
 }

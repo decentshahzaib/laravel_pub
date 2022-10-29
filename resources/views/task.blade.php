@@ -6,6 +6,10 @@
  <div class="row w-100">
     <div class="col-12 d-flex justify-content-center align-items-center" style="height: 95vh;">
         <div class="w-25">
+
+            <div class="alert alert-warning" id="error" style="display: none;"></div>
+            <div class="alert alert-success" id="success" style="display: none;"></div>
+
             <div class="panel-body border mb-4 p-3">
                 <!-- Display Validation Errors -->
                 @include('common.errors')
@@ -23,7 +27,7 @@
                             <input type="text" name="name" id="task-name" class="form-control">
                         </div>
                         <div class="col-lg-12 col-sm-6 mb-2 d-flex">
-                            <input type="time" name="time" id="time" class="form-control" onchange="myfun(this);">
+                            <input type="time" name="time" id="time" class="form-control" onchange="myFun(this);">
                             <select name="drt" id="drt" class="form-select" disabled>
                                 <option value="AM">AM</option>
                                 <option value="PM">PM</option>
