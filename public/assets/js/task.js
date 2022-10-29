@@ -11,14 +11,15 @@ function myfun(val) {
     }
 }
 
-$(document).ready(function () { 
-    $('#sub1').on('click', function (e) { 
+$(document).ready(function () {
+    // alert('go');
+    $('#sub1').on('click', function (e) {
         e.preventDefault();
         var fdata = new FormData(form1);
         // alert(fdata);
 
         $.ajax({
-            url: '/task3/insert',
+            url: '/task/insert',
             type: 'post',
             contentType: false,
             processData: false,
@@ -28,7 +29,10 @@ $(document).ready(function () {
                     alert("Data has been inserted");
                     window.location.reload();
                 }
-                alert(res);
+                else {
+                    alert(res);
+                }
+
             }
         });
     });
