@@ -1,20 +1,3 @@
-// function myFun(val) {
-//     var value = val.value;
-//     var date = new Date(value);
-//     alert(value);
-//     var houre = date.getHours();
-
-//     if (houre > '12') {
-//         var date2 = value.split('-');
-//         var day = date2[2].split('T');
-//         var new_date = new Date(date2[0], date2[1] - 1, day[0])
-//         val.value = day[0] + '-' + date2[1] + '-' + date2[0] + 'T' + day[1];
-//     }
-//     else {
-//         val.value = 'AM';
-//     }
-// }
-
 $(document).ready(function () {
     // alert('go');
     $('#sub1').on('click', function (e) {
