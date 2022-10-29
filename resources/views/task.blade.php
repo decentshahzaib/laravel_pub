@@ -27,11 +27,7 @@
                             <input type="text" name="name" id="task-name" class="form-control">
                         </div>
                         <div class="col-lg-12 col-sm-6 mb-2 d-flex">
-                            <input type="time" name="time" id="time" class="form-control" onchange="myFun(this);">
-                            <input type="text" name="drt" id="drt" class="form-control" readonly>
-                        </div>
-                        <div class="col-lg-12 col-sm-6">
-                            <input type="date" name="date" id="task-date" class="form-control">
+                            <input type="datetime-local" name="date" id="date" class="form-control">
                         </div>
                     </div>
         
@@ -58,8 +54,7 @@
                     <!-- Table Headings -->
                     <thead>
                         <th>Name</th>
-                        <th>Time</th>
-                        <th>Date</th>
+                        <th>DateTime</th>
                         <th>Delete</th>
                     </thead>
  
@@ -72,10 +67,12 @@
                                     <div>{{ $task->name }}</div>
                                 </td>
                                 <td class="table-text">
-                                    <div>{{ $task->time }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $task->date }}</div>
+                                    <div>@php
+                                        $date = date('Y M d A', strtotime($task->date));
+                                        
+                                        @endphp
+                                        {{ $date }}
+                                    </div>
                                 </td>
  
                                 <!-- Delete Button -->

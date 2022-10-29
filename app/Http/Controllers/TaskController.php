@@ -15,17 +15,10 @@ class TaskController extends Controller
     }
     
     public function store(Request $req){
-        // $drt = date('A', strtotime($req->time));
-         $date = $req->date;
-        $time = $req->time . ' ' .$req->drt;
        
         $arr = [
             'name' => 'required | min:5 | max:20',
-            'date' => Rule::unique('tasks')->where(function ($query) use ($date, $time) {
-                return $query->where('date', $date)
-                    ->where('time', $time);
-            }),
-               'time' => 'required',
+            'date' =>  'required',
         ];
 
         $valid = Validator::make($req->all(), $arr);
@@ -35,21 +28,20 @@ class TaskController extends Controller
         }
         else{
 
-            $houre = date('H', strtotime($req->time));
-            if ($houre > 12) {
-                $houre = $houre - 12;
-                $time = date($houre .':i A', strtotime($req->time));
+            $date2 = Task::where('date', $req->date)->get();
+            if ($date2->count() > 0) {
+                return ['status' => 'error', 'msg' => 'Date Already Taken!'];
             }
             else{
-                $time = date('H:i A', strtotime($req->time));
-            }
+                $date6 = date('Y-m-d A', strtotime($req->date));
+                // return $date;
 
-            $data = new Task;
-            $data->name = $req->name;
-            $data->time = $time;
-            $data->date = $req->date;
-            if($data->save()){
-                return ['status' => 'success', 'msg' => 'Data has been Inserted.'];
+                $data = new Task;
+                $data->name = $req->name;
+                $data->date = $req->date;
+                if($data->save()){
+                    return ['status' => 'success', 'msg' => 'Data has been Inserted.'];
+                }
             }
         }
     }
