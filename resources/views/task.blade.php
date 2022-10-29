@@ -28,10 +28,7 @@
                         </div>
                         <div class="col-lg-12 col-sm-6 mb-2 d-flex">
                             <input type="time" name="time" id="time" class="form-control" onchange="myFun(this);">
-                            <select name="drt" id="drt" class="form-select" disabled>
-                                <option value="AM">AM</option>
-                                <option value="PM">PM</option>
-                            </select>
+                            <input type="text" name="drt" id="drt" class="form-control" readonly>
                         </div>
                         <div class="col-lg-12 col-sm-6">
                             <input type="date" name="date" id="task-date" class="form-control">

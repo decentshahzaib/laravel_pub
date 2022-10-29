@@ -4,10 +4,10 @@ function myFun(val) {
     // alert(houre[0]);
 
     if (houre > '12') {
-        $('#drt option[value="PM"]').attr('selected', true);
+        $('#drt').val('PM');
     }
     else {
-        $('#drt option[value="AM"]').attr('selected', true);
+        $('#drt').val('AM');
     }
 }
 
@@ -69,7 +69,7 @@ function showMsg(val1, val2) {
         msg.css({
             'display': 'none',
         });
-        
+
         if (val1 == 'success') {
             window.location.reload();
         }
