@@ -38,15 +38,15 @@ $(document).ready(function () {
     });
 });
 
-function showMsg(val1, val2) {
-    if (val1 == 'error') {
+function showMsg(status, message) {
+    if (status == 'error') {
         var msg = $('#error');
     }
     else {
         var msg = $('#success');
     }
 
-    msg.html(val2);
+    msg.html(message);
     msg.css({
         'display': 'block',
     });
@@ -56,7 +56,7 @@ function showMsg(val1, val2) {
             'display': 'none',
         });
 
-        if (val1 == 'success') {
+        if (status == 'success') {
             window.location.reload();
         }
     }, 3000);
