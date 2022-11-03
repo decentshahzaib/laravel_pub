@@ -1,12 +1,12 @@
 $(document).ready(function () {
     // alert('go');
-    $('#sub1').on('click', function (e) {
+    $('#submit').on('click', function (e) {
         e.preventDefault();
         var fdata = new FormData(form1);
         // alert(fdata);
 
         $.ajax({
-            url: '/task/insert',
+            url: '/Task',
             type: 'post',
             contentType: false,
             processData: false,
@@ -17,8 +17,6 @@ $(document).ready(function () {
                     
                 }
                 else {
-
-                    // alert(typeof (res['msg']));
 
                     if (typeof (res['msg']) != 'string') {
                         
@@ -32,6 +30,7 @@ $(document).ready(function () {
                     else {
                         showMsg(res.status, res.msg);
                     }
+
                 }
 
             }

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TasksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +16,4 @@ use App\Http\Controllers\TaskController;
 
 
 // Task 3
-Route::get('/task', [TaskController::class, 'index']);
-Route::post('/task/insert', [TaskController::class, 'store'])->name('taskStore');
-Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('taskDelete');
+Route::resource('/Task', TasksController::class);

@@ -16,33 +16,23 @@ class TaskController extends Controller
     
     public function store(Request $req){
        
-        $arr = [
+        $valid = Validator::make($req->all(), [
             'name' => 'required | min:5 | max:20',
-            'date' =>  'required',
-        ];
-
-        $valid = Validator::make($req->all(), $arr);
+            'date' =>  'required | unique:tasks,date',
+        ]);
+        
         if ($valid->fails()) {
             $list = $valid->messages();
-            return ['status' => 'error', 'msg' => $list];
+            return response()->json(['status' => 'error', 'msg' => $list]);
         }
         else{
-
-            $date2 = Task::where('date', $req->date)->get();
-            if ($date2->count() > 0) {
-                return ['status' => 'error', 'msg' => 'Date Already Taken!'];
-            }
-            else{
-                $date6 = date('Y-m-d A', strtotime($req->date));
-                // return $date;
 
                 $data = new Task;
                 $data->name = $req->name;
                 $data->date = $req->date;
                 if($data->save()){
-                    return ['status' => 'success', 'msg' => 'Data has been Inserted.'];
+                    return response()->json(['status' => 'success', 'msg' => 'Data has been Inserted.']);
                 }
-            }
         }
     }
 

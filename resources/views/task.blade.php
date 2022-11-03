@@ -34,7 +34,7 @@
                     <!-- Add Task Button -->
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-6">
-                            <button type="submit" class="btn btn-success" id="sub1">
+                            <button type="submit" class="btn btn-success" id="submit">
                                 <i class="fa fa-plus"></i> Add Task
                             </button>
                         </div>
@@ -67,17 +67,14 @@
                                     <div>{{ $task->name }}</div>
                                 </td>
                                 <td class="table-text">
-                                    <div>@php
-                                        $date = date('Y M d A', strtotime($task->date));
-                                        
-                                        @endphp
-                                        {{ $date }}
+                                    <div>
+                                        {{ $task->date }}
                                     </div>
                                 </td>
  
                                 <!-- Delete Button -->
                                 <td>
-                                    <form action="{{ route('taskDelete', [$task->id]) }}" method="POST">
+                                    <form action="{{ url('Task/'. $task->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                             
