@@ -1,25 +1,12 @@
-function myFun(val) {
-    var value = val.value;
-    var houre = value.split(':');
-    // alert(houre[0]);
-
-    if (houre > '12') {
-        $('#drt').val('PM');
-    }
-    else {
-        $('#drt').val('AM');
-    }
-}
-
 $(document).ready(function () {
     // alert('go');
-    $('#sub1').on('click', function (e) {
+    $('#submit').on('click', function (e) {
         e.preventDefault();
         var fdata = new FormData(form1);
         // alert(fdata);
 
         $.ajax({
-            url: '/task/insert',
+            url: '/Task',
             type: 'post',
             contentType: false,
             processData: false,
@@ -30,8 +17,6 @@ $(document).ready(function () {
                     
                 }
                 else {
-
-                    // alert(typeof (res['msg']));
 
                     if (typeof (res['msg']) != 'string') {
                         
@@ -45,6 +30,7 @@ $(document).ready(function () {
                     else {
                         showMsg(res.status, res.msg);
                     }
+
                 }
 
             }
@@ -52,15 +38,15 @@ $(document).ready(function () {
     });
 });
 
-function showMsg(val1, val2) {
-    if (val1 == 'error') {
+function showMsg(status, message) {
+    if (status == 'error') {
         var msg = $('#error');
     }
     else {
         var msg = $('#success');
     }
 
-    msg.html(val2);
+    msg.html(message);
     msg.css({
         'display': 'block',
     });
@@ -70,7 +56,7 @@ function showMsg(val1, val2) {
             'display': 'none',
         });
 
-        if (val1 == 'success') {
+        if (status == 'success') {
             window.location.reload();
         }
     }, 3000);

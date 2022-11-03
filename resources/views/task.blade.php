@@ -27,18 +27,14 @@
                             <input type="text" name="name" id="task-name" class="form-control">
                         </div>
                         <div class="col-lg-12 col-sm-6 mb-2 d-flex">
-                            <input type="time" name="time" id="time" class="form-control" onchange="myFun(this);">
-                            <input type="text" name="drt" id="drt" class="form-control" readonly>
-                        </div>
-                        <div class="col-lg-12 col-sm-6">
-                            <input type="date" name="date" id="task-date" class="form-control">
+                            <input type="datetime-local" name="date" id="date" class="form-control">
                         </div>
                     </div>
         
                     <!-- Add Task Button -->
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-6">
-                            <button type="submit" class="btn btn-success" id="sub1">
+                            <button type="submit" class="btn btn-success" id="submit">
                                 <i class="fa fa-plus"></i> Add Task
                             </button>
                         </div>
@@ -58,8 +54,7 @@
                     <!-- Table Headings -->
                     <thead>
                         <th>Name</th>
-                        <th>Time</th>
-                        <th>Date</th>
+                        <th>DateTime</th>
                         <th>Delete</th>
                     </thead>
  
@@ -72,15 +67,14 @@
                                     <div>{{ $task->name }}</div>
                                 </td>
                                 <td class="table-text">
-                                    <div>{{ $task->time }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $task->date }}</div>
+                                    <div>
+                                        {{ $task->date }}
+                                    </div>
                                 </td>
  
                                 <!-- Delete Button -->
                                 <td>
-                                    <form action="{{ route('taskDelete', [$task->id]) }}" method="POST">
+                                    <form action="{{ url('Task/'. $task->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                             
